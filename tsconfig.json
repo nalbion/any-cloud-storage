@@ -5,6 +5,7 @@
     "rootDir": "src",
     "outDir": "./dist",
     "sourceMap": true,
+    "declaration": true,
     "strict": true,
     "lib": ["ES2022"],
     "types": ["node", "jest"],

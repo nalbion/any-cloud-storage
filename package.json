@@ -1,6 +1,6 @@
 {
   "name": "any-cloud-storage",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A common interface for file storage for AWS, GCP, Firebase, Supabase, git and local file system",
   "keywords": [
     "cloud",
@@ -38,6 +38,12 @@
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write ."
   },
+  "files": [
+    "dist/",
+    "README.md",
+    "package.json",
+    "LICENSE.txt"
+  ],
   "dependencies": {
     "fetch-blob": "^4.0.0",
     "fs": "0.0.1-security"
