@@ -7,7 +7,7 @@ type FirebaseFileStorageConfig = FileStorageConfig & {
 };
 
 import { getApp } from 'firebase/app';
-import { ref, uploadBytes, getBytes, deleteObject, getStorage, FirebaseStorage, list } from 'firebase/storage';
+import { ref, uploadBytes, getBytes, deleteObject, getStorage, FirebaseStorage, list, getDownloadURL } from 'firebase/storage';
 
 export default class FirebaseClientFileStorage extends FileStorage {
   private storage: FirebaseStorage;
@@ -38,6 +38,10 @@ export default class FirebaseClientFileStorage extends FileStorage {
   override async listFiles(directoryPath: string): Promise<string[]> {
     const files = await list(this.getRef(directoryPath));
     return files.items.map((file) => file.name);
+  }
+
+  override getAbsolutePath(filePath: string): Promise<string> {
+    return getDownloadURL(this.getRef(filePath));
   }
 
   private getRef(filePath: string) {

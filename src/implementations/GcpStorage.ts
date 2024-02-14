@@ -21,24 +21,33 @@ export default class GcpStorage extends FileStorage {
     this.bucketName = config.bucketName;
   }
 
-  async saveFile(filePath: string, data: Buffer, options?: SaveFileOptions): Promise<void> {
+  override async saveFile(filePath: string, data: Buffer, options?: SaveFileOptions): Promise<void> {
     const file = this.storage.bucket(this.bucketName).file(filePath);
     await file.save(data, { contentType: options?.contentType });
   }
 
-  async readFile(filePath: string): Promise<Buffer> {
+  override async readFile(filePath: string): Promise<Buffer> {
     const file = this.storage.bucket(this.bucketName).file(filePath);
     const data = await file.download();
     return data[0];
   }
 
-  async deleteFile(filePath: string): Promise<void> {
+  override async deleteFile(filePath: string): Promise<void> {
     const file = this.storage.bucket(this.bucketName).file(filePath);
     await file.delete();
   }
 
-  async listFiles(directoryPath: string): Promise<string[]> {
+  override async listFiles(directoryPath: string): Promise<string[]> {
     const [files] = await this.storage.bucket(this.bucketName).getFiles({ prefix: directoryPath });
     return files.map((file) => file.name);
+  }
+
+  override async getAbsolutePath(filePath: string): Promise<string> {
+    const response = await this.storage
+      .bucket(this.bucketName)
+      .file(filePath)
+      .getSignedUrl({ action: 'read', expires: Date.now() + 1000 * 60 * 60 });
+
+    return response[0];
   }
 }

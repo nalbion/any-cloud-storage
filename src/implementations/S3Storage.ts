@@ -54,4 +54,8 @@ export default class S3Storage extends FileStorage {
 
     return response.Contents?.map((item) => item.Key || '') || [];
   }
+
+  override getAbsolutePath(filePath: string): string {
+    return `https://${this.bucket}.s3.amazonaws.com/${filePath}`;
+  }
 }

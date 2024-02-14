@@ -46,4 +46,8 @@ export default class SupabaseStorage extends FileStorage {
 
     return data.map((entry) => entry.name);
   }
+
+  override getAbsolutePath(filePath: string): string {
+    return `${this.client.storage.from(this.bucket).getPublicUrl(filePath)}`;
+  }
 }

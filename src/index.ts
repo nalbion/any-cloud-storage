@@ -2,6 +2,10 @@ import FileStorage from './FileStorage';
 import FileStorageFactory from './FileStorageFactory';
 import { FileStorageConfig } from './types';
 
+export { default as FileStorage } from './FileStorage';
+export { default as FileStorageFactory } from './FileStorageFactory';
+export * from './types';
+
 /**
  * @example
  *

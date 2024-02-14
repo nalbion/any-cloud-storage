@@ -34,4 +34,8 @@ export default class LocalFileStorage extends FileStorage {
     const fullPath = path.join(this.basePath, directoryPath);
     return await fs.promises.readdir(fullPath);
   }
+
+  override getAbsolutePath(filePath: string): string {
+    return path.isAbsolute(filePath) ? filePath : path.join(process.cwd(), filePath);
+  }
 }

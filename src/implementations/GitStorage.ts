@@ -1,4 +1,3 @@
-import * as fs from 'fs';
 import { simpleGit, type SimpleGitOptions, type SimpleGit } from 'simple-git';
 
 import LocalFileStorage, { LocalFileStorageConfig } from './LocalFileStorage';
@@ -6,15 +5,20 @@ import { SaveFileOptions } from '../types';
 
 export type GitStorageConfig = LocalFileStorageConfig & {
   repoUrl: string;
+  branch?: string;
   username: string;
   options?: Partial<SimpleGitOptions>;
 };
 
 export default class GitStorage extends LocalFileStorage {
   private readonly git: SimpleGit;
+  private repoUrl: string;
+  private branch?: string;
 
   constructor(config: GitStorageConfig) {
     super(config);
+    this.repoUrl = config.repoUrl;
+    this.branch = config.branch;
 
     const git = config.options ? simpleGit(config.options) : simpleGit(config.basePath);
 
@@ -40,5 +44,9 @@ export default class GitStorage extends LocalFileStorage {
     await this.git.add(filePath);
     await this.git.commit(options?.description || `Update ${filePath}`);
     await this.git.push();
+  }
+
+  override getAbsolutePath(filePath: string): string {
+    return `${this.repoUrl.replace('github.com', 'raw.githubusercontent.com')}/${this.branch || 'main'}/${filePath}`;
   }
 }
