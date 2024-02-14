@@ -4,6 +4,7 @@ import { FileStorageConfig } from './types';
 
 export { default as FileStorage } from './FileStorage';
 export { default as FileStorageFactory } from './FileStorageFactory';
+export { default as LocalFileStorage } from './implementations/LocalFileStorage';
 export * from './types';
 
 /**
