@@ -1,13 +1,13 @@
 {
   "name": "any-cloud-storage",
   "version": "1.0.0",
-  "description": "A common interface for file storage for AWS, GCP, Azure, Firebase, Supabase and local file system",
+  "description": "A common interface for file storage for AWS, GCP, Firebase, Supabase, git and local file system",
   "keywords": [
     "cloud",
     "storage",
     "AWS",
     "GCP",
-    "Azure",
+    "git",
     "Firebase",
     "Supabase"
   ],
