@@ -1,6 +1,6 @@
 import { ReadFileOptions, SaveFileOptions } from './types';
 
-/** Implementations include Local file, S3, Git, Firebase & GCP storage. */ 
+/** Implementations include Local file, S3, Git, Firebase & GCP storage */ 
 export default abstract class FileStorage {
   abstract saveFile(filePath: string, data: Buffer, options?: SaveFileOptions): Promise<void>;
   abstract readFile(filePath: string, options?: ReadFileOptions): Promise<Buffer>;
