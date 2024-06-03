@@ -32,6 +32,7 @@ describe('createStorage', () => {
     const data = await storage.readTextFile(testFileName);
     // Verify the content of the text file
     expect(data).toBe(testFileContent);
+    expect(true).toBe(false);
   });
 
   it('should save and read a binary file', async () => {
