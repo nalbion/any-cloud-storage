@@ -29,6 +29,7 @@ export default class LocalFileStorage extends FileStorage {
 
   override async deleteFile(filePath: string): Promise<void> {
     const fullPath = path.join(this.basePath, filePath);
+    // nosec this code needs to be able to read arbitrary files
     await fs.unlink(fullPath);
   }
 
